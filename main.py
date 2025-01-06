@@ -7,3 +7,7 @@ with open('experimentations_5G.csv', newline='') as file:
     #On va ensuite parcourir notre feuille csv : ligne par ligne
     for row in read:
         ...
+        
+        
+        
+# Test

@@ -27,4 +27,3 @@ Fin de projet le 21/01.
 ### 📁 Accès au jeu de données
 
 La liste détaillée des sites d’expérimentation est mise à disposition à travers la ressource « Sites d’expérimentation 5G », mise à jour au fur et à mesure de la publication des arrêtés d’autorisation de l'ARCEP (la dernière mise à jour date du 15 octobre 2024). Le fichier est au format CSV, encodé en CP1252 (Windows) avec un séparateur de champ « ; » et un séparateur de chaîne de caractère « " ». Les champs sont décrits dans le document Exp5G-Formats.
-

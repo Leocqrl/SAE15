@@ -21,6 +21,8 @@ Document présentant l'organisation du projet (ressources, planification des tâ
 Programme en langage Python (extension .py) déposé sur un espace GITHUB. Le lien vers le fichier sera mis à disposition dans l'espace de dépôt du groupe.
 Bilan de l'étude (réalisée à l'aide du langage Python). Ce document sera déposé dans l'espace de dépôt du groupe.
 
+Fin de projet le 21/01.
+
 
 ### 📁 Accès au jeu de données
 

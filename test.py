@@ -47,6 +47,8 @@ with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
                     
             iframe=branca.element.IFrame(html, width=150, height=taille)
             Popup=folium.Popup(iframe, max_width=500, max_height=300 )
+
+            #Couleur via le compteur afin de mettre le marker dans une couleur plus ou moins sombre
             if compteur>=4:
                 ICON=folium.Icon(color='red')
             elif 4>compteur>=2:
@@ -55,6 +57,7 @@ with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
                 ICON=folium.Icon(color='orange')
             elif compteur==0:
                 ICON=folium.Icon(color='lightgray')
+
             #Création du marker avec toute les informations précédentes
             folium.Marker(location=(lat,lon), popup=Popup, icon=ICON).add_to(Marker_Cluster)
         else :

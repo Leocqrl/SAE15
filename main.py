@@ -1,4 +1,4 @@
-import csv
+import csv, folium
 
 # Premièrement, on va ouvrir notre fichier csv
 # On précisera que les lignes sont séparer par '' et les cases sont délimiter par ';'

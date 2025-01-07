@@ -1,26 +1,33 @@
-import csv, folium
+import csv
+import pandas as pd
 
-m=folium.Map(
-    max_bounds=True,
-    zoom_start=6,
-    location=(47, 1),
-    )
-fg=folium.FeatureGroup(name="Icon collection", control=False).add_to(m)
-
-# Premièrement, on va ouvrir notre fichier csv
-# On précisera que les lignes sont séparer par '' et les cases sont délimiter par ';'
+# Création d'un dictionnaire qui va contenir une liste d'entreprises pour chaque région
+regions_dict ={}
+# Ouverture du fichier CSV
 with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
-    read=csv.reader(file, delimiter=';')
-    #On va ensuite parcourir notre feuille csv : ligne par ligne
+    read = csv.reader(file, delimiter=';')
+    # Parcours du fichier CSV ligne par ligne
     for i, row in enumerate(read):
-        #On va retirer la première ligne afin de ne pas être déranger par le nom des colonnes
         if i!=0:
-            #On va ensuite mettre en float et remplacer les ',' par des '.' pour ne pas avoir d'erreur
-            lat=float(row[6].replace(',','.'))
-            lon=float(row[7].replace(',','.'))
-            #On met dans la variable texte les informations que l'on veut lorsque l'on clique sur chaque Marker un a un
-            texte=row[0]+': '+row[1]
-            #Création du marker avec toute les informations précédentes
-            folium.Marker(location=(lat,lon), popup=texte,icon=folium.Icon(icon="green")).add_to(fg)
+            entreprise = row[0]  # Entreprise (colonne 0)
+            
+            if row[11]!='':
+                region = row[11]     # Région (colonne 11)
+            else : 
+                region= row[8]
+            # Ajouter l'entreprise à la liste correspondant à la région
+            if region in regions_dict and entreprise not in regions_dict[region]:
+                regions_dict[region].append(entreprise)
+            else :
+                regions_dict[region]= [entreprise]
+print(regions_dict)
+print(len(regions_dict))
 
-m.save("Carte_Interactive.html")
+tableau = pd.DataFrame.from_dict(region_dict)
+print(tableau)
+
+# Affichage du dictionnaire des régions avec les entreprises
+#for region, entreprises in regions_dict.items():
+#    print(f"Région: {region}")
+#    for entreprise in entreprises:
+#        print(f"  - {entreprise}")

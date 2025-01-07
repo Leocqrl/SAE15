@@ -1,4 +1,4 @@
-import csv, folium
+import csv, folium, branca
 
 m=folium.Map(
     max_bounds=True,
@@ -19,8 +19,13 @@ with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
             lat=float(row[6].replace(',','.'))
             lon=float(row[7].replace(',','.'))
             #On met dans la variable texte les informations que l'on veut lorsque l'on clique sur chaque Marker un a un
-            texte=row[0]+': '+row[1]
+            html=f"""
+            <h5>{row[0]}</h5>
+            <FONT size="2px">
+            <p>Bande de fréquences : {row[1]}</p>
+            </FONT>
+            """
             #Création du marker avec toute les informations précédentes
-            folium.Marker(location=(lat,lon), popup=texte,icon=folium.Icon(icon="green")).add_to(fg)
+            folium.Marker(location=(lat,lon), popup=folium.Popup(branca.element.IFrame(html, 125, 75), max_width=125)).add_to(fg)
 
 m.save("Carte_Interactive.html")

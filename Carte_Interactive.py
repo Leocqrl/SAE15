@@ -1,5 +1,6 @@
 import csv, folium, branca
 from folium.plugins import MarkerCluster
+from main import regions_dict, LOC
 
 m=folium.Map(
     max_bounds=True,
@@ -62,5 +63,14 @@ with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
             folium.Marker(location=(lat,lon), popup=Popup, icon=ICON).add_to(Marker_Cluster)
         else :
             Legende=row
+    
+        # for x in regions_dict:
+        #     if LOC[x]!=[] and x!='':
+        #         if len(regions_dict[x])>=10:
+        #             folium.Circle(location=LOC[x], radius=75000, color="black", weight=1, fill_opacity=0.1, opacity=0.1, fill_color="darkgreen", fill=False, popup=x).add_to(m)
+        #         if 10>len(regions_dict[x])>=5:
+        #             folium.Circle(location=LOC[x], radius=50000, color="black", weight=1, fill_opacity=0.1, opacity=0.1, fill_color="green", fill=False, popup=x).add_to(m)
+        #         if 5>len(regions_dict[x])>=1:
+        #             folium.Circle(location=LOC[x], radius=25000, color="black", weight=1, fill_opacity=0.1, opacity=0.1, fill_color="lightgreen", fill=False, popup=x).add_to(m)
 
 m.save("Carte_Interactive.html")

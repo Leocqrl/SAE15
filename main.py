@@ -3,6 +3,7 @@ import pandas as pd
 
 # Création d'un dictionnaire qui va contenir une liste d'entreprises pour chaque région
 regions_dict ={}
+LOC={}
 # Ouverture du fichier CSV
 with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
     read = csv.reader(file, delimiter=';')
@@ -10,7 +11,8 @@ with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
     for i, row in enumerate(read):
         if i!=0:
             entreprise = row[0]  # Entreprise (colonne 0)
-            
+            lat=float(row[6].replace(',','.'))
+            lon=float(row[7].replace(',','.'))
             if row[11]!='':
                 region = row[11]     # Région (colonne 11)
             else : 
@@ -18,8 +20,12 @@ with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
             # Ajouter l'entreprise à la liste correspondant à la région
             if region not in regions_dict :
                 regions_dict[region]=[]
+                LOC[region]=[]
             if entreprise not in regions_dict[region]:
                 regions_dict[region].append(entreprise)
+            if LOC[region]==[]:
+                LOC[region].append(lat)
+                LOC[region].append(lon)
 
 df = pd.DataFrame({
     'Région': regions_dict.keys(),
@@ -28,4 +34,4 @@ df = pd.DataFrame({
 
 df = df.sort_values(by='Région').reset_index(drop=True)
 
-print(df)
+#print(LOC)

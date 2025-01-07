@@ -14,6 +14,9 @@ with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
     #On va ensuite parcourir notre feuille csv : ligne par ligne
     for i, row in enumerate(read):
         if i!=0:
-            folium.Marker(location=(float(row[6].replace(',','.')),float(row[7].replace(',','.')))).add_to(fg)
+            lat=float(row[6].replace(',','.'))
+            lon=float(row[7].replace(',','.'))
+            texte=row[0]+': '+row[1]
+            folium.Marker(location=(lat,lon), popup=texte).add_to(fg)
 
-m.save("index.html")
+m.save("Carte_Interactive.html")

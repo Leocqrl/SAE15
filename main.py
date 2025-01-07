@@ -6,4 +6,4 @@ with open('experimentations_5G.csv', newline='') as file:
     read=csv.reader(file, delimiter=';')
     #On va ensuite parcourir notre feuille csv : ligne par ligne
     for row in read:
-        ...
+        print(row[0],row[11])

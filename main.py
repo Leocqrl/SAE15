@@ -10,24 +10,20 @@ with open('experimentations_5G.csv', newline='', encoding='cp1252') as file:
     for i, row in enumerate(read):
         if i!=0:
             entreprise = row[0]  # Entreprise (colonne 0)
-            
+            lat=float(row[6].replace(',','.'))
+            lon=float(row[7].replace(',','.'))
             if row[11]!='':
                 region = row[11]     # Région (colonne 11)
             else : 
-                region= row[8]
+                region= row[10]
             # Ajouter l'entreprise à la liste correspondant à la région
-            if region in regions_dict and entreprise not in regions_dict[region]:
+            if region not in regions_dict :
+                regions_dict[region]=[]
+            if entreprise not in regions_dict[region]:
                 regions_dict[region].append(entreprise)
-            else :
-                regions_dict[region]= [entreprise]
-print(regions_dict)
-print(len(regions_dict))
+df = pd.DataFrame({
+    'Région': regions_dict.keys(),
+    'Entreprise': regions_dict.values()
+})
 
-tableau = pd.DataFrame.from_dict(region_dict)
-print(tableau)
-
-# Affichage du dictionnaire des régions avec les entreprises
-#for region, entreprises in regions_dict.items():
-#    print(f"Région: {region}")
-#    for entreprise in entreprises:
-#        print(f"  - {entreprise}")
+df = df.sort_values(by='Région').reset_index(drop=True)

@@ -44,4 +44,3 @@ for index, row in df.iterrows():
 
 tableau.pack(padx=20, pady=20)
 fenetre.mainloop()
-#qs

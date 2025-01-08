@@ -1,6 +1,16 @@
 import csv
 import pandas as pd
+from tkinter import *
+from tkinter import ttk
 
+fenetre = Tk()
+fenetre.title("Tableau des entreprises par région")
+colonne = ("Région", "Entreprises")
+tableau = ttk.Treeview(fenetre, columns=colonne, show="headings")
+tableau.column("Région", width=200)
+tableau.column("Entreprises", width=800)
+tableau.heading("Région",text="Région")
+tableau.heading("Entreprises",text="Entreprises")
 # Création d'un dictionnaire qui va contenir une liste d'entreprises pour chaque région
 regions_dict ={}
 # Ouverture du fichier CSV
@@ -27,3 +37,10 @@ df = pd.DataFrame({
 })
 
 df = df.sort_values(by='Région').reset_index(drop=True)
+for index, row in df.iterrows():
+    region = row['Région']
+    entreprises = ", ".join(row['Entreprise'])
+    tableau.insert("", "end", values=(region, entreprises))
+
+tableau.pack(padx=20, pady=20)
+fenetre.mainloop()

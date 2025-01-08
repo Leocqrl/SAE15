@@ -27,5 +27,3 @@ df = pd.DataFrame({
 })
 
 df = df.sort_values(by='Région').reset_index(drop=True)
-
-#print(LOC)

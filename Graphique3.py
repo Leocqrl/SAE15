@@ -2,14 +2,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Charger les données
-file_path = 'experimentations_5G.csv'  # Assurez-vous que le fichier est dans le même répertoire ou précisez son chemin complet
-data = pd.read_csv(file_path, encoding='cp1252', sep=';', quotechar='"')
+fichier = 'experimentations_5G.csv'  # Assurez-vous que le fichier est dans le même répertoire ou précisez son chemin complet
+donnée = pd.read_csv(fichier, encoding='cp1252', sep=';', quotechar='"')
 
 # Sélectionner les colonnes concernant les technologies
-tech_columns = [col for col in data.columns if 'Techno' in col]
+tech_colone = [col for col in donnée.columns if 'Techno' in col]
 
 # Compter le nombre d'expérimentateurs utilisant chaque technologie
-tech_usage = data[tech_columns].sum()
+tech_usage = donnée[tech_colone].sum()
 
 # Trier les technologies par utilisation
 tech_usage_sorted = tech_usage.sort_values(ascending=False)

@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 # Charger le fichier CSV
 donnée = pd.read_csv('experimentations_5G.csv', encoding='cp1252', sep=';', quotechar='"')
 
@@ -35,7 +36,8 @@ other_sites_count = site_counts['Nombre de sites'][10:].sum()
 # Ajouter une catégorie "Autres" pour regrouper les entreprises restantes
 labels = list(top_companies['Expérimentateur']) + ['Autres']
 sizes = list(top_companies['Nombre de sites']) + [other_sites_count]
-
+print(sizes)
+print(labels)
 # Couleurs personnalisées pour une meilleure distinction
 colors = plt.cm.tab10.colors[:len(sizes)]
 

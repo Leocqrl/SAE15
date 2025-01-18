@@ -13,7 +13,7 @@ experimentateur_region = donnée['Région'].value_counts()
 # l'option value_counts compte le nombre ou une valeur dans la serie Région se répéte.
 print(experimentateur_region)
 # Créer un histogramme
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 5))
 experimentateur_region.plot(kind='bar', color='red')
 plt.title('Nombre d\'expérimentations 5G par région')
 plt.xlabel('Région')

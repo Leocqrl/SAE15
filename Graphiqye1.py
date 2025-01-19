@@ -22,7 +22,7 @@ plt.xticks(rotation=45)
 plt.grid(axis='y')
 
 # Afficher le graphique
-plt.tight_layout()
+plt.tight_layout() 
 plt.show()
 
 

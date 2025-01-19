@@ -23,5 +23,5 @@ plt.ylabel("Nombre d'utilisations")
 plt.xticks(rotation=45, ha='right')
 plt.grid(axis='y')
 
-plt.tight_layout()
+plt.tight_layout() # fonction qui permet d'ajuster les graphique et les sous graphiques pour évité les chevauchement et d'avoir une meilleur présentation
 plt.show()

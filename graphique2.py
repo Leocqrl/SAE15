@@ -7,6 +7,7 @@ print(donnée)
 # Compter les sites par entreprise
 
 site_counts = donnée.groupby('Expérimentateur').size().reset_index(name='Nombre de sites')
+
 print(site_counts)
 # groupby() : permet de regrouper les données selon une ou plusieurs colonnes. 
 

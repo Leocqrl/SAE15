@@ -159,18 +159,20 @@ fenetre.mainloop()
 
 ###   Graph 1 :
 # Charger les données avec les paramètres spécifiques
-file_path = 'experimentations_5G.csv'
-data = pd.read_csv(file_path, encoding='cp1252', sep=';', quotechar='"')
+fichier = 'experimentations_5G.csv'
+donnée = pd.read_csv(fichier, encoding='cp1252', sep=';', quotechar='"')
+
 
 # Vérifier les colonnes disponibles
-print(data.columns)
+print(donnée)
 
 # Exemple : Compter le nombre d'expérimentations par région
-experiments_by_region = data['Région'].value_counts()
-
+experimentateur_region = donnée['Région'].value_counts()
+# l'option value_counts compte le nombre ou une valeur dans la serie Région se répéte.
+print(experimentateur_region)
 # Créer un histogramme
-plt.figure(figsize=(10, 6))
-experiments_by_region.plot(kind='bar', color='red')
+plt.figure(figsize=(10, 5))
+experimentateur_region.plot(kind='bar', color='red')
 plt.title('Nombre d\'expérimentations 5G par région')
 plt.xlabel('Région')
 plt.ylabel('Nombre d\'expérimentations')
@@ -178,28 +180,42 @@ plt.xticks(rotation=45)
 plt.grid(axis='y')
 
 # Afficher le graphique
-plt.tight_layout()
+plt.tight_layout() 
 plt.savefig('Graph1.png')
 plt.close()
 
 
 ### Graph 2
 # Compter les sites par entreprise
-site_counts = data.groupby('Expérimentateur').size().reset_index(name='Nombre de sites')
+
+site_counts = donnée.groupby('Expérimentateur').size().reset_index(name='Nombre de sites')
+
+print(site_counts)
+# groupby() : permet de regrouper les données selon une ou plusieurs colonnes. 
+
+# .size(): compte le nombre de lignes dans chaque groupe
+
+# reset_index() : Convertit l'index des groupes en colonnes normales, créant un DataFrame.
+
+# name='Nombre de sites' : Renomme la colonne contenant les tailles des groupes en "Nombre de site"
 
 # Trier les entreprises par nombre de sites (ordre décroissant)
-site_counts = site_counts.sort_values(by='Nombre de sites', ascending=False)
 
+site_counts = site_counts.sort_values(by='Nombre de sites', ascending=False) 
+#sort_values est une fonction qui permet de trié les données d'un Dataframe donc tableau.
+#la fonction ascending=false false permet de trié par ordre décroissant 
 # Sélectionner les 10 premières entreprises pour le camembert
 top_companies = site_counts[:10]
 other_sites_count = site_counts['Nombre de sites'][10:].sum()
+# site_counts['nombre de sites']  permet d'utilisé seulement la colone Nombre de sites et de compté à partir de la 11éme ligne puis calculé la somme des sites qui se répéte à l'aide de la fonction sum()
 
 # Ajouter une catégorie "Autres" pour regrouper les entreprises restantes
 labels = list(top_companies['Expérimentateur']) + ['Autres']
 sizes = list(top_companies['Nombre de sites']) + [other_sites_count]
-
+print(sizes)
+print(labels)
 # Couleurs personnalisées pour une meilleure distinction
-colors = plt.cm.tab10.colors[:len(labels)]
+colors = plt.cm.tab10.colors[:len(sizes)]
 
 # Tracer le camembert
 plt.figure(figsize=(10, 8))
@@ -207,43 +223,42 @@ wedges, texts, autotexts = plt.pie(
     sizes,
     labels=labels,
     autopct='%1.1f%%',
-    startangle=140,
+    startangle=0,
     colors=colors,
-    textprops={'fontsize': 12},
-    pctdistance=0.85  # Ajuste la position des pourcentages
+    textprops={'fontsize': 12}, #Ajuste la taille de la police
+    pctdistance=0.9  # Ajuste la position des pourcentages
 )
 
 # Ajouter un cercle pour créer un effet de "donut"
-centre_circle = plt.Circle((0, 0), 0.70, fc='white')
+centre_circle = plt.Circle((0, 0), 0.7, fc='white')
 plt.gca().add_artist(centre_circle)
+# cette fonction nous as permis d'ajouter  un cercle vide dans notre cercle créer donc d'avoir un effet donuts
 
 # Titre et style
 plt.title('Répartition des sites par entreprise (Top 10)', fontsize=16)
-plt.tight_layout()
+plt.tight_layout() # ajuste automatiquement les marges et espacements des sous-graphiques pour éviter les chevauchements et optimiser la présentation.
 plt.savefig('Graph2.png')
 plt.close()
 
 
 ### Graph 3 :
 # Sélectionner les colonnes concernant les technologies
-tech_columns = [col for col in data.columns if 'Techno' in col]
-
+tech_colone = [col for col in donnée.columns if 'Techno' in col]
 # Compter le nombre d'expérimentateurs utilisant chaque technologie
-tech_usage = data[tech_columns].sum()
-
+tech_usage = donnée[tech_colone].sum()
+print(tech_usage)
 # Trier les technologies par utilisation
 tech_usage_sorted = tech_usage.sort_values(ascending=False)
 
-
 plt.figure(figsize=(12, 6))
-tech_usage_sorted.plot(kind='bar', color='royalblue')
+tech_usage_sorted.plot(kind='bar', color='green')
 plt.title('Technologies les plus utilisées par les expérimentateurs')
 plt.xlabel('Technologies')
 plt.ylabel("Nombre d'utilisations")
 plt.xticks(rotation=45, ha='right')
 plt.grid(axis='y')
 
-plt.tight_layout()
+plt.tight_layout() # fonction qui permet d'ajuster les graphique et les sous graphiques pour évité les chevauchement et d'avoir une meilleur présentation
 plt.savefig('Graph3.png')
 plt.close()
 

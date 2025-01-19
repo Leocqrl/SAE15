@@ -179,7 +179,8 @@ plt.grid(axis='y')
 
 # Afficher le graphique
 plt.tight_layout()
-plt.show()
+plt.savefig('Graph1.png')
+plt.close()
 
 
 ### Graph 2
@@ -219,8 +220,11 @@ plt.gca().add_artist(centre_circle)
 # Titre et style
 plt.title('Répartition des sites par entreprise (Top 10)', fontsize=16)
 plt.tight_layout()
-plt.show()
+plt.savefig('Graph2.png')
+plt.close()
 
+
+### Graph 3 :
 # Sélectionner les colonnes concernant les technologies
 tech_columns = [col for col in data.columns if 'Techno' in col]
 
@@ -240,5 +244,6 @@ plt.xticks(rotation=45, ha='right')
 plt.grid(axis='y')
 
 plt.tight_layout()
-plt.show()
+plt.savefig('Graph3.png')
+plt.close()
 
